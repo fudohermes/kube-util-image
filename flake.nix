@@ -96,6 +96,7 @@
           sops
 
           # Network tools
+          aria2 # multi-protocol download accelerator (pairs with yt-dlp)
           bind # dig, nslookup
           curl
           grpcurl
@@ -147,6 +148,7 @@
           less
           patch
           pv # pipe viewer
+          gnutar # was missing — extraction needed a Python fallback workaround
           tree
           unzip
           xz
@@ -155,20 +157,38 @@
           zip
           zstd
 
+          # Media processing (yt-dlp DASH merges, probe/transcode debugging,
+          # mirrors what the Grout server-side normalizer does)
+          ffmpeg
+          mediainfo
+          exiftool # media metadata inspection
+
           # Shell utilities & linting
+          bc # arbitrary-precision calculator
           parallel # GNU parallel
           shellcheck
           sqlite
+
+          # Database clients (debugging Pseudovision/Jellyfin backing stores)
+          postgresql # psql client
+
+          # Web lookups
+          whois
 
           # Additional utilities
           grout-cli
           grout-bulk # resumable bulk uploader that drives grout-cli
         ];
 
-        # Environment variables for the container
+        # Environment variables for the container. SSL_CERT_FILE/NIX_SSL_CERT_FILE
+        # point curl / python / other non-Nix tools at the CA bundle — without
+        # them HTTPS calls fail with cert errors that look like "no internet"
+        # (verified 2026-11-10: yt-dlp was unusable until SSL_CERT_FILE was set).
         containerEnv = {
           EDITOR = "emacs";
           TERM = "xterm-256color";
+          SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
+          NIX_SSL_CERT_FILE = "${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt";
         };
 
         # Additional sshd configuration (mirrors fudoniten/hermes-terminal).
