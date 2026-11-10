@@ -6,6 +6,7 @@
         "nix-fetcher-data": "nix-fetcher-data",
         "nixpkgs": [
           "fudo-nix-helpers",
+          "nix-clj-helpers",
           "nixpkgs"
         ]
       },
@@ -74,6 +75,7 @@
       "inputs": {
         "nixpkgs": [
           "fudo-nix-helpers",
+          "nix-clj-helpers",
           "clj-nix",
           "nixpkgs"
         ]
@@ -187,18 +189,18 @@
     },
     "fudo-nix-helpers": {
       "inputs": {
-        "clj-nix": "clj-nix",
+        "nix-clj-helpers": "nix-clj-helpers",
         "nixpkgs": [
           "nixpkgs"
         ],
         "utils": "utils"
       },
       "locked": {
-        "lastModified": 1793315412,
-        "narHash": "sha256-AnsnULO7hLy1II3PYd71wlbx+oxkAOeAL3/3MvNXtb4=",
+        "lastModified": 1793388443,
+        "narHash": "sha256-XFSV/q3gOs4FBC9efNbuf1NBuWf5MQY9BWUK02LWDyA=",
         "owner": "fudoniten",
         "repo": "fudo-nix-helpers",
-        "rev": "7bbae6a86a2d28e37836d812970a6ab284a6b99f",
+        "rev": "cad8a9d7b5233bfc23e640371e7bcbf9c6c72c65",
         "type": "github"
       },
       "original": {
@@ -239,11 +241,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793307234,
-        "narHash": "sha256-d3Hwnvo4DvS04HWkJCTkHKVPNpKdCba3Px0Nc3uTGF8=",
+        "lastModified": 1794170962,
+        "narHash": "sha256-B8jncPQWg7Dpt//4qkXqv9C5e6Tc+C/GfxVuoseK8UY=",
         "owner": "fudoniten",
         "repo": "grout",
-        "rev": "c170bc24b1a4eef8d02e79bb0e0d92159c0e1248",
+        "rev": "4f3fa63c3c815a87ea332c7aef8c2c29f03c1d12",
         "type": "github"
       },
       "original": {
@@ -252,11 +254,38 @@
         "type": "github"
       }
     },
+    "nix-clj-helpers": {
+      "inputs": {
+        "clj-nix": "clj-nix",
+        "nixpkgs": [
+          "fudo-nix-helpers",
+          "nixpkgs"
+        ],
+        "utils": [
+          "fudo-nix-helpers",
+          "utils"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793316955,
+        "narHash": "sha256-nevQe4SF4siRIrgFJ95tubE5Gob7kcRZK1oSbRzKa54=",
+        "owner": "fudoniten",
+        "repo": "nix-clj-helpers",
+        "rev": "9ff50116baf895b9a80faa39720b40dd997e53c2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fudoniten",
+        "repo": "nix-clj-helpers",
+        "type": "github"
+      }
+    },
     "nix-fetcher-data": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": [
           "fudo-nix-helpers",
+          "nix-clj-helpers",
           "clj-nix",
           "nixpkgs"
         ]
@@ -398,11 +427,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1793183032,
-        "narHash": "sha256-/nYLRqlw7vEj2bua2U3aAjF4Jqkd6RxpO+xACfKkldE=",
-        "rev": "08d3a97586f6b6343b3b5e799980773629432610",
+        "lastModified": 1794165970,
+        "narHash": "sha256-YqwBRaXgqn0+I8BCsZVLkzd746X/84fr1/FvZiocsYE=",
+        "rev": "ac588ef1c914865dad517b337ea0eb9694a4021c",
         "type": "tarball",
-        "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.13050.08d3a97586f6/nixexprs.tar.zst"
+        "url": "https://releases.nixos.org/nixos/26.05/nixos-26.05.13936.ac588ef1c914/nixexprs.tar.zst"
       },
       "original": {
         "id": "nixpkgs",
