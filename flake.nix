@@ -3,7 +3,7 @@
 # This flake builds an OCI container image that serves as a utility and debug
 # image for Kubernetes. We can add whatever useful utilities we want to use to
 # interact with Kubernetes pods.
-# 
+#
 # Build the container:
 #   nix build .#container
 #
@@ -26,8 +26,17 @@
     };
   };
 
-  outputs = { self, nixpkgs, grout, utils, fudo-nix-helpers, ... }:
-    utils.lib.eachDefaultSystem (system:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      grout,
+      utils,
+      fudo-nix-helpers,
+      ...
+    }:
+    utils.lib.eachDefaultSystem (
+      system:
       let
         pkgs = import nixpkgs { inherit system; };
 
@@ -141,6 +150,8 @@
           tree
           unzip
           xz
+          yt-dlp
+          yt-dlg
           zip
           zstd
 
@@ -231,11 +242,15 @@
           inherit extraSshdConfig;
           volumes = sshHostKeyVolumes;
 
-          tags = [ "v1.0.0" "latest" ];
+          tags = [
+            "v1.0.0"
+            "latest"
+          ];
           verbose = true;
         };
 
-      in {
+      in
+      {
         packages = {
           # The container image itself
           container = containerImage;
@@ -253,5 +268,6 @@
             dive # For inspecting container layers
           ];
         };
-      });
+      }
+    );
 }
