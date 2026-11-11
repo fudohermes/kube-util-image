@@ -163,6 +163,14 @@
           mediainfo
           exiftool # media metadata inspection
 
+          # Optical-disc remuxing (2026-11-11 media audit: /data/complete holds
+          # UHD Blu-ray disc structures — BDMV dirs with multi-segment MPLS
+          # playlists — that ffmpeg/ffprobe cannot parse; PV probes them as
+          # 1-second "BR-DISK" garbage. makemkvcon reads the playlists and
+          # remuxes losslessly to MKV; mkvtoolnix covers general remux work).
+          makemkv
+          mkvtoolnix
+
           # Shell utilities & linting
           bc # arbitrary-precision calculator
           parallel # GNU parallel
