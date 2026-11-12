@@ -163,6 +163,14 @@
           mediainfo
           exiftool # media metadata inspection
 
+          # Optical-disc remuxing (2026-11-11 media audit: /data/complete holds
+          # UHD Blu-ray disc structures — BDMV dirs with multi-segment MPLS
+          # playlists — that ffmpeg/ffprobe cannot parse; PV probes them as
+          # 1-second "BR-DISK" garbage. makemkvcon reads the playlists and
+          # remuxes losslessly to MKV; mkvtoolnix covers general remux work).
+          makemkv
+          mkvtoolnix
+
           # Shell utilities & linting
           bc # arbitrary-precision calculator
           parallel # GNU parallel
@@ -217,7 +225,14 @@
 
           inherit authorizedKeys;
 
+          # Match the arr stack's PUID/PGID (sonarr/radarr write as 1001:1000
+          # per deployment-sonarr/radarr.yaml). Files written over SSH by the
+          # agent must land as 1001:1000 or the arr apps can't chmod/delete
+          # them (verified 2026-11-12: arr-util wrote as 1000:1000, Sonarr
+          # couldn't take ownership of from-arr-downloads content).
           user = "fudo";
+          uid = 1001;
+          gid = 1000;
           packages = terminalPackages;
           env = containerEnv;
 
@@ -238,6 +253,8 @@
         deployContainer = helpers.deployTerminalContainer {
           inherit (containerConfig) name repo;
           user = "fudo";
+          uid = 1001;
+          gid = 1000;
           inherit authorizedKeys;
           packages = terminalPackages;
           env = containerEnv;
@@ -254,6 +271,8 @@
         deployContainerVersioned = helpers.deployTerminalContainer {
           inherit (containerConfig) name repo;
           user = "fudo";
+          uid = 1001;
+          gid = 1000;
           inherit authorizedKeys;
           packages = terminalPackages;
           env = containerEnv;
